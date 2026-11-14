@@ -46,3 +46,7 @@ The team has approved Angular standalone components and TypeScript for ongoing d
 The six personal briefs are published on main under docs/team/. Read docs/team/README.md and the named learner's brief for assignments, branch setup, file ownership and the explicit prediction/teach-back checkpoints. The copy of docs/LEARNING.md on main explains the Angular codebase; Angular source paths such as src/app and public/ are available after switching to the Angular codebase. Preserve uncommitted work when switching.
 
 The scientific integrity, selected region and coordinate rules apply to both implementations. Documentation-only work on main does not require migrating the application. Do not merge the Angular migration merely to access the briefs.
+
+## Shared context
+
+Read [CONTEXT.md](CONTEXT.md) for the current project snapshot and pending review of MARSWALK Full Team Plan.pdf. The user has chosen that plan, but its contents have not been read; do not infer or claim PDF-derived assignments. Existing briefs describe the current allocation pending reconciliation with the actual plan.

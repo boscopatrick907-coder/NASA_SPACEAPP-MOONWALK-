@@ -6,6 +6,10 @@ A tablet-friendly research prototype for the team's NASA Space Apps Challenge 20
 **Research prototype — not a certified astronaut navigation or safety system.**
 
 
+## Project context
+
+Read [CONTEXT.md](CONTEXT.md) for the shared project background, branch status, team roles, learning workflow, scientific limits and pending review of the user-selected full team plan.
+
 ## Team coding-agent briefs
 
 The personal learning briefs are now on **main**: [Willy, Emma, Gaddielle, Enzo, Longla and YOU](docs/team/README.md). Give each teammate their file and repository access.
