@@ -7,8 +7,8 @@ The selected region is **Gale Crater, Mount Sharp boxwork formations investigate
 
 ## Implementation
 - Prioritize interactive imagery, scientific layer controls, geological context, manual start/destination/waypoint selection and supported route assessment.
-- Use plain HTML, CSS, JavaScript modules, Leaflet, JSON and prepared local assets. Keep map, route, storage and offline responsibilities separate.
-- Avoid frameworks, backends, databases and large browser-side scientific processing. Prepare scientific rasters with QGIS/GDAL.
+- The original application on main uses plain HTML, CSS, JavaScript modules, Leaflet, JSON and prepared local assets. Keep map, route, storage and offline responsibilities separate.
+- For the original main application, avoid adding frameworks, backends, databases and large browser-side scientific processing. The team's approved Angular migration is described below. Prepare scientific rasters with QGIS/GDAL.
 - Do not implement autonomous routing, real-time astronaut tracking, hardware integration or a helmet HUD.
 - Store essential runtime assets locally. Preserve licenses and image credits.
 - Inspect existing work and preserve teammates' changes. Do not commit credentials, node_modules or large raw products.
@@ -38,3 +38,11 @@ Elevation and slope require an aligned verified DEM with units, datum, resolutio
 - Reject stored routes and notes belonging to another image reference.
 - Browser storage can be cleared or restricted. Support JSON export for backups.
 - Run relevant checks after meaningful changes. Do not claim tests passed unless executed. Keep testing proportionate to the hackathon.
+
+## Angular team assignments and learning briefs
+
+The team has approved Angular standalone components and TypeScript for ongoing development. That implementation is on feat/angular-migration; personal feature branches start from that Angular codebase and follow its Angular instructions. The plain JavaScript implementation notes above describe the original application on main.
+
+The six personal briefs are published on main under docs/team/. Read docs/team/README.md and the named learner's brief for assignments, branch setup, file ownership and the explicit prediction/teach-back checkpoints. The copy of docs/LEARNING.md on main explains the Angular codebase; Angular source paths such as src/app and public/ are available after switching to the Angular codebase. Preserve uncommitted work when switching.
+
+The scientific integrity, selected region and coordinate rules apply to both implementations. Documentation-only work on main does not require migrating the application. Do not merge the Angular migration merely to access the briefs.

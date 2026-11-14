@@ -5,6 +5,13 @@ A tablet-friendly research prototype for the team's NASA Space Apps Challenge 20
 
 **Research prototype — not a certified astronaut navigation or safety system.**
 
+
+## Team coding-agent briefs
+
+The personal learning briefs are now on **main**: [Willy, Emma, Gaddielle, Enzo, Longla and YOU](docs/team/README.md). Give each teammate their file and repository access.
+
+The briefs guide Angular development on **feat/angular-migration** and personal branches derived from it. The application described in this README is the original plain JavaScript prototype on main. Follow the team guide for Angular setup and the learner/agent checkpoints.
+
 ## What works
 - Leaflet pan/zoom viewer with genuine NASA HiRISE regional-context imagery.
 - Imagery, illustrative target, pixel-grid and missing-coverage controls.
