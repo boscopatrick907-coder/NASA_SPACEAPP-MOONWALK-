@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "project": "MARSWALK",
+  "region": "Gale Crater / Mount Sharp boxwork",
+  "aoiStatus": "Exact exploration AOI pending verification; this is regional context.",
+  "imageReference": "PIA26306-prepared-1600x815-v1",
+  "map": {
+    "coordinateSystem": "local-image-pixels",
+    "origin": "bottom-left",
+    "xAxis": "right",
+    "yAxis": "up",
+    "assetPath": "assets/boxwork-context.jpg",
+    "width": 1600,
+    "height": 815,
+    "calibration": null
+  },
+  "datasets": [
+    {
+      "id": "PIA26306",
+      "type": "optical",
+      "status": "verified-context",
+      "title": "HiRISE Views Mount Sharp’s Boxwork",
+      "assetPath": "assets/boxwork-context.jpg",
+      "sourceUrl": "https://www.jpl.nasa.gov/images/pia26306-hirise-views-mount-sharps-boxwork/",
+      "downloadUrl": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA26306.jpg",
+      "productId": "PIA26306",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "HiRISE",
+      "observationDate": "2006-12-10",
+      "resolutionMetersPerPixel": null,
+      "footprint": null,
+      "coordinateSystem": null,
+      "credit": "NASA/JPL-Caltech/University of Arizona",
+      "originalWidth": 7488,
+      "originalHeight": 3813,
+      "processingNotes": [
+        "Resized to 1600 × 815 pixels; JPEG quality 88. No geometric correction or georeferencing performed."
+      ],
+      "limitations": [
+        "Regional context only. Source describes ridges similar to Curiosity’s study area.",
+        "Exact Curiosity AOI, geographic orientation, local scale and georeferencing unverified. Do not derive metric distance, slope, or elevation from this image."
+      ]
+    },
+    {
+      "id": "dem-pending",
+      "type": "dem",
+      "status": "unavailable",
+      "title": "Elevation and slope",
+      "instrument": null,
+      "observationDate": null,
+      "resolutionMetersPerPixel": null,
+      "sourceUrl": null,
+      "assetPath": null,
+      "limitations": [
+        "A validated, co-registered DEM covering the exact AOI is required. No elevation or slope assessment is available."
+      ]
+    },
+    {
+      "id": "science-pending",
+      "type": "geology",
+      "status": "unavailable",
+      "title": "Geolocated mineralogy / chemistry",
+      "instrument": null,
+      "observationDate": null,
+      "resolutionMetersPerPixel": null,
+      "sourceUrl": null,
+      "assetPath": null,
+      "limitations": [
+        "Verified geolocated scientific observations covering the exact AOI have not been supplied. Demo targets are interface examples."
+      ]
+    }
+  ]
+}

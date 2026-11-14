@@ -1,0 +1,18 @@
+{
+  "name": "MARSWALK — Martian Surface Exploration and Safety Planner",
+  "short_name": "MARSWALK",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1319",
+  "theme_color": "#0d1319",
+  "description": "Offline Mars exploration research prototype with regional imagery and illustrative route planning.",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

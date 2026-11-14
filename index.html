@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#11171d">
+<title>MARSWALK — Martian exploration planner</title>
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css"><link rel="stylesheet" href="css/styles.css">
+<script defer src="vendor/leaflet/leaflet.js"></script><script type="module" src="js/app.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#workspace">Skip to exploration workspace</a>
+<header class="app-header">
+<a class="brand" href="./" aria-label="MARSWALK home"><img src="assets/icon.svg" alt="" width="44" height="44"><span><strong>MARSWALK<span class="accent">.</span></strong><small>MARTIAN EXPLORATION PLANNER</small></span></a>
+<div class="event"><span class="eyebrow">NASA SPACE APPS CHALLENGE 2026</span><span class="prototype">RESEARCH PROTOTYPE</span></div>
+<div class="offline-tools"><span id="offline-status">Cache not prepared</span><button id="cache-button" class="button" type="button">↓ Prepare offline</button><span id="cache-status" role="status">Offline package not yet confirmed</span></div>
+</header>
+<div class="context-banner"><span class="status-dot" aria-hidden="true"></span><p><strong>Regional context image • exact Curiosity AOI pending.</strong> Route and marker positions are illustrative.</p><span class="badge">DEMO WORKSPACE</span></div>
+<p id="notice" class="notice" role="status" aria-live="polite">Choose a start point and a destination to sketch your first route.</p>
+<main id="workspace" class="workspace">
+<aside class="panel layers-panel" aria-labelledby="layers-heading">
+<div class="panel-heading"><span class="section-index">01</span><h2 id="layers-heading">Scientific layers</h2></div><p class="panel-intro">Explore available data and its limitations.</p>
+<div class="layer-group"><p class="eyebrow">AVAILABLE IN THIS PACKAGE</p>
+<label class="layer-row"><input id="layer-imagery" type="checkbox" checked><span><strong>HiRISE context image</strong><small>Historical optical imagery</small></span></label>
+<label class="layer-row"><input id="layer-markers" type="checkbox" checked><span><strong>Example science targets</strong><small>Illustrative positions</small></span></label>
+<label class="layer-row"><input id="layer-grid" type="checkbox"><span><strong>Image coordinate grid</strong><small>200 image pixels · not meters</small></span></label>
+<label class="layer-row"><input id="layer-coverage" type="checkbox" checked><span><strong>Uncertainty overlay</strong><small>Terrain assessment unavailable</small></span></label></div>
+<div class="layer-group unavailable"><p class="eyebrow">AWAITING VERIFIED DATA</p>
+<label class="layer-row"><input type="checkbox" disabled><span><strong>Elevation &amp; slope</strong><small>Verified data needed</small></span></label>
+<label class="layer-row"><input type="checkbox" disabled><span><strong>Mineralogy / chemistry</strong><small>Verified data needed</small></span></label></div>
+<div class="coverage-key"><span aria-hidden="true">!</span><div><strong>Missing data ≠ low risk</strong><p>Terrain concerns cannot be assessed from this context image.</p></div></div>
+<details class="source-details"><summary>Data provenance</summary><div id="source-table"><p>Loading source metadata…</p></div></details>
+<div class="location-card"><span class="eyebrow">SELECTED REGION</span><strong>Gale Crater</strong><span>Mount Sharp · Boxwork formations</span><p>Final exploration boundaries require verified NASA data.</p></div>
+</aside>
+<section class="panel map-panel" aria-labelledby="map-heading">
+<div class="map-heading"><div><p class="eyebrow">EXPLORATION MAP</p><h1 id="map-heading">Mount Sharp <span>/ Gale Crater</span></h1></div><span class="badge">REGIONAL CONTEXT</span></div>
+<div class="mode-toolbar" role="group" aria-label="Map interaction mode">
+<button type="button" data-mode="start" aria-pressed="false"><span class="point-dot start-dot" aria-hidden="true"></span>Set start</button>
+<button type="button" data-mode="destination" aria-pressed="false"><span class="point-dot destination-dot" aria-hidden="true"></span>Set destination</button>
+<button type="button" data-mode="waypoint" aria-pressed="false">＋ Add waypoint</button>
+<button type="button" data-mode="inspect" aria-pressed="true">⌖ Inspect / note</button></div>
+<div class="map-stage"><div id="map" tabindex="0" role="region" aria-label="Interactive Martian regional context image" aria-describedby="map-help"></div>
+<div id="map-loading" class="map-loading"><strong>Opening the exploration workspace</strong><p>Loading locally prepared imagery…</p></div>
+<div class="map-caption"><span>NASA / HiRISE</span><small>Regional context · no verified ground scale</small></div><button id="fit-map" class="button map-fit" type="button">⊡ Fit image</button></div>
+<div class="map-statusbar"><span id="mode-status">Inspect / note mode</span><small>LOCAL IMAGE COORDINATES</small></div>
+<p id="map-help" class="map-help">Tap or click to place a point. Keyboard: arrows pan, + / − zoom, Enter sets a point at the map center in a selection mode. Escape returns to Inspect.</p>
+</section>
+<aside class="mission-panel" aria-label="Route planning and science explorer">
+<section class="panel route-panel" aria-labelledby="route-heading"><div class="panel-heading"><span class="section-index">02</span><h2 id="route-heading">Route planner</h2><span class="badge">MANUAL</span></div><p class="panel-intro">Sketch a proposed excursion on the image.</p>
+<div class="route-endpoints"><div><span class="point-dot start-dot" aria-hidden="true"></span><span><small>START POINT</small><strong id="route-start">Not selected</strong></span></div><div><span class="point-dot destination-dot" aria-hidden="true"></span><span><small>DESTINATION</small><strong id="route-end">Not selected</strong></span></div></div>
+<div class="route-metrics"><div><span>Mapped distance</span><strong id="route-distance">Unavailable</strong><small>Verified scale required</small></div><div><span>Route points</span><strong id="route-count">0</strong><small>Start, waypoints, destination</small></div><div><span>Elevation change</span><strong id="route-elevation">Unavailable</strong><small>Verified DEM required</small></div><div><span>Slope assessment</span><strong id="route-slope">Unavailable</strong><small>Verified DEM required</small></div></div>
+<div class="warning-box"><span aria-hidden="true">!</span><p id="route-warning">Terrain risk unknown. No verified terrain or hazard data is included.</p></div>
+<details class="route-points-details"><summary>Route points · image coordinates</summary><ol id="route-points"></ol></details>
+<div class="button-row"><button id="undo-route" class="button" type="button">↶ Undo</button><button id="clear-route" class="button" type="button">Clear route</button></div><div class="button-row"><button id="save-route" class="button button-primary" type="button">Save route locally</button><button id="load-route" class="button" type="button">Load saved</button></div></section>
+<section class="panel science-panel" aria-labelledby="science-heading"><div class="panel-heading"><span class="section-index">03</span><h2 id="science-heading">Science explorer</h2></div>
+<div class="target-picker" role="group" aria-label="Example science targets"><button type="button" data-target="demo-ridge">◇ Example ridge</button><button type="button" data-target="demo-hollow">◇ Example hollow</button></div>
+<span class="science-label">GEOLOGICAL CONTEXT</span><h3 id="science-title">Explore the boxwork</h3><p id="science-body">Select an example target to review its context. Marker positions are illustrative.</p><p id="science-metadata" class="science-metadata"></p>
+<button id="use-target" class="button" type="button" disabled>Use demo target as destination</button><a id="science-source" class="source-link" target="_blank" rel="noopener noreferrer">NASA source</a></section>
+</aside>
+<section class="panel notebook-panel" aria-labelledby="notebook-heading">
+<div class="notebook-form-column"><div class="panel-heading"><span class="section-index">04</span><h2 id="notebook-heading">Field notebook</h2><span class="badge">LOCAL ONLY</span></div><p class="panel-intro">Record a field observation. Notes stay in this browser.</p>
+<form id="notebook-form"><label for="note-location">Selected image position · x / y</label><input id="note-location" type="text" readonly value="No position selected"><label for="note-text">Observation</label><textarea id="note-text" required maxlength="3000" rows="3" placeholder="Describe a geological feature, a question, or a proposed investigation…"></textarea><div class="notebook-form-footer"><span class="muted">Illustrative location · not georeferenced</span><button id="save-note" class="button button-primary" type="submit">Save observation</button></div></form></div>
+<div class="saved-notes-column"><div class="notes-heading"><h3>Saved observations</h3><button id="export-mission" class="button" type="button">↓ Export mission JSON</button></div><div id="notes-list" class="notes-list"><p>No local field notes yet.</p></div></div></section>
+</main>
+<footer class="app-footer"><span><strong>MARSWALK</strong> · Martian Surface Exploration and Safety Planner</span><span>Research prototype. Not a certified astronaut navigation or safety system.</span></footer>
+<noscript><p>MARSWALK requires JavaScript for the map, routes and local observations.</p></noscript>
+</body></html>

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": "local-image-pixels",
+  "imageReference": "PIA26306-prepared-1600x815-v1",
+  "disclaimer": "All positions and target identities are illustrative. These are not geolocated NASA observations.",
+  "targets": [
+    {
+      "id": "demo-ridge",
+      "title": "Example ridge study",
+      "kind": "demonstration",
+      "point": {
+        "x": 965,
+        "y": 490
+      },
+      "summary": "Demonstration target with an illustrative position. A field team could record ridge morphology here in the interface; this is not an identified NASA sampling site.",
+      "context": "NASA interprets Mount Sharp’s boxwork ridges as associated with ancient groundwater moving through fractured rock. This describes geological history and does not establish current water or mobility safety.",
+      "sourceUrl": "https://www.jpl.nasa.gov/images/pia26306-hirise-views-mount-sharps-boxwork/"
+    },
+    {
+      "id": "demo-hollow",
+      "title": "Example hollow study",
+      "kind": "demonstration",
+      "point": {
+        "x": 630,
+        "y": 280
+      },
+      "summary": "Demonstration target with an illustrative position. Use it to practice selecting a destination and recording an observation. Local geology, slope, and traversability at this position are unverified.",
+      "context": "The regional image provides optical context. A hollow visible in an image is not a measured elevation difference or a confirmed terrain hazard.",
+      "sourceUrl": "https://www.jpl.nasa.gov/images/pia26306-hirise-views-mount-sharps-boxwork/"
+    }
+  ]
+}
