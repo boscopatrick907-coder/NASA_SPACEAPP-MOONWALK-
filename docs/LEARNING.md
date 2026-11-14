@@ -82,3 +82,7 @@ Coordinates are local image pixels with origin bottom-left, not Earth or Mars la
 Distance, elevation and slope need verified scale and terrain data. Do not fill missing measurements with invented values to make the UI look complete. Read DATA.md before changing calibration or adding a dataset.
 
 Official reference: https://angular.dev/guide/components
+
+## Your personal assignment
+
+Read [the team guide](team/README.md), then choose your named brief. It includes a small first task, your files, a review partner and instructions for your agent to coach you through prediction, implementation, checking and teach-back.

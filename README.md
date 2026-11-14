@@ -124,4 +124,8 @@ The installed runtime dependency audit reports no findings. The development CLI 
 - **404 after deployment:** serve the contents of the browser output folder and include the generated sw.js.
 - **Notes missing after changing ports:** localStorage is isolated by origin. Check the original address before clearing anything.
 
-For six people, work in three pairs: map/layers, planner/shared state, and science/notebook/offline verification. Agree on core/models.ts before changing shared data.
+Use the named assignments and review partners in [docs/team/README.md](docs/team/README.md). Read core/models.ts before changing shared data.
+
+## Personal coding-agent briefs
+
+Willy, Emma, Gaddielle, Enzo, Longla and the coordinator each have a [personal Markdown brief](docs/team/README.md). Give your agent the appropriate brief and repository access. The briefs define file ownership, one first task, scientific limits and explicit prediction/teach-back checkpoints so each student can explain and modify their work.
