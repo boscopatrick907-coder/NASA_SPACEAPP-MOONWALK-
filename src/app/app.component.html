@@ -1,0 +1,20 @@
+<a class="skip-link" href="#workspace">Skip to exploration workspace</a>
+<header class="app-header">
+  <a class="brand" href="./" aria-label="MARSWALK home"><img src="assets/icon.svg" alt="" width="44" height="44"><span><strong>MARSWALK<span class="accent">.</span></strong><small>MARTIAN EXPLORATION PLANNER</small></span></a>
+  <div class="event"><span class="eyebrow">NASA SPACE APPS CHALLENGE 2026</span><span class="prototype">RESEARCH PROTOTYPE</span></div>
+  <div class="offline-tools"><span id="offline-status">{{offline.status()}}</span><button id="cache-button" class="button" type="button" [disabled]="offline.preparing() || mission.loading() || !!mission.loadError()" (click)="offline.prepare()">↓ Prepare offline</button><span id="cache-status" role="status">{{offline.detail()}}</span></div>
+</header>
+<div class="context-banner"><span class="status-dot" aria-hidden="true"></span><p><strong>Regional context image • exact Curiosity AOI pending.</strong> Route and marker positions are illustrative.</p><span class="badge">DEMO WORKSPACE</span></div>
+<p id="notice" class="notice" role="status" aria-live="polite">{{mission.notice()}}</p>
+@if (mission.loading()) {
+  <p class="initial-message">Loading local scientific context…</p>
+} @else if (mission.loadError()) {
+  <main id="workspace" class="initial-message" role="alert"><h1>Unable to load this exploration package</h1><p>{{mission.loadError()}}</p><p>Check public/data and public/assets, then reload. The README describes how to run the app.</p></main>
+} @else {
+  <main id="workspace" class="workspace">
+    <app-layers /><app-map />
+    <aside class="mission-panel" aria-label="Route planning and science explorer"><app-planner /><app-science /></aside>
+    <app-notebook />
+  </main>
+}
+<footer class="app-footer"><span><strong>MARSWALK</strong> · Martian Surface Exploration and Safety Planner</span><span>Research prototype. Not a certified astronaut navigation or safety system.</span></footer>

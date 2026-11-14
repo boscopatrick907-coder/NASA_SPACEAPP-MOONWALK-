@@ -1,0 +1,14 @@
+<div class="panel-heading"><span class="section-index">03</span><h2>Science explorer</h2></div>
+<div class="target-picker" role="group" aria-label="Example science targets">
+  @for (target of mission.targets(); track target.id) {<button type="button" [attr.data-target]="target.id" (click)="mission.inspectTarget(target)">◇ {{target.title}}</button>}
+</div>
+<span class="science-label">GEOLOGICAL CONTEXT</span>
+@if (mission.selectedTarget(); as target) {
+  <h3 id="science-title">{{target.title}} · DEMO</h3><p id="science-body">{{target.summary}} {{target.context}}</p>
+  <p id="science-metadata" class="science-metadata">Illustrative position: {{mission.coordinate(target.point)}}. No instrument measurement is assigned to this marker.</p>
+} @else {
+  <h3 id="science-title">Mount Sharp’s boxwork</h3><p id="science-body">NASA links these ridge networks to ancient groundwater moving through fractured rock. Select a demo target to practice the science workflow. Target positions are illustrative.</p>
+  <p id="science-metadata" class="science-metadata">HiRISE / MRO · observed 2006-12-10 · metric resolution unverified · exact exploration AOI pending.</p>
+}
+<button id="use-target" class="button" type="button" [disabled]="!mission.selectedTarget() || !mission.mapReady()" (click)="mission.useTarget()">Use demo target as destination</button>
+<a id="science-source" class="source-link" [attr.href]="source()" target="_blank" rel="noopener noreferrer">NASA/JPL regional context · PIA26306</a>

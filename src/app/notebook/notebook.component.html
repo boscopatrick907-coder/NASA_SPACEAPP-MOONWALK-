@@ -1,0 +1,12 @@
+<div class="notebook-form-column"><div class="panel-heading"><span class="section-index">04</span><h2>Field notebook</h2><span class="badge">LOCAL ONLY</span></div><p class="panel-intro">Record a field observation. Notes stay in this browser.</p>
+<form id="notebook-form" (ngSubmit)="save()">
+  <label for="note-location">Selected image position · x / y</label><input id="note-location" type="text" readonly [value]="mission.noteLocation()">
+  <label for="note-text">Observation</label><textarea id="note-text" name="observation" required maxlength="3000" rows="3" [(ngModel)]="noteText" placeholder="Describe a geological feature, a question, or a proposed investigation…"></textarea>
+  <div class="notebook-form-footer"><span class="muted">Illustrative location · not georeferenced</span><button id="save-note" class="button button-primary" type="submit">Save observation</button></div>
+</form></div>
+<div class="saved-notes-column"><div class="notes-heading"><h3>Saved observations</h3><button id="export-mission" class="button" type="button" (click)="mission.exportMission()">↓ Export mission JSON</button></div>
+<div id="notes-list" class="notes-list">
+  @for (note of newestFirst(); track note.id) {
+    <article class="note-card"><time [attr.datetime]="note.createdAt">Device time · {{note.createdAt | date:'medium'}}</time><p>{{note.point ? mission.coordinate(note.point) + ' · illustrative image position' : 'No image position attached'}}</p><p class="note-body">{{note.text}}</p></article>
+  } @empty {<p>No local field notes yet.</p>}
+</div></div>

@@ -7,8 +7,8 @@ The selected region is **Gale Crater, Mount Sharp boxwork formations investigate
 
 ## Implementation
 - Prioritize interactive imagery, scientific layer controls, geological context, manual start/destination/waypoint selection and supported route assessment.
-- The original application on main uses plain HTML, CSS, JavaScript modules, Leaflet, JSON and prepared local assets. Keep map, route, storage and offline responsibilities separate.
-- For the original main application, avoid adding frameworks, backends, databases and large browser-side scientific processing. The team's approved Angular migration is described below. Prepare scientific rasters with QGIS/GDAL.
+- Use Angular standalone components, TypeScript, CSS, Leaflet, JSON and prepared local assets. Keep map, route, storage and offline responsibilities separate. Angular is the team's requested stack.
+- Avoid extra UI/state frameworks, backends, databases and large browser-side scientific processing. Prepare scientific rasters with QGIS/GDAL.
 - Do not implement autonomous routing, real-time astronaut tracking, hardware integration or a helmet HUD.
 - Store essential runtime assets locally. Preserve licenses and image credits.
 - Inspect existing work and preserve teammates' changes. Do not commit credentials, node_modules or large raw products.
@@ -29,7 +29,7 @@ Use custom local-coordinate JSON, not geographic GeoJSON for pixel positions. Re
 
 Enable metric route distance only after independently validating a uniformly scaled local planar raster and documenting a positive finite metersPerPixel, verified flag, source URL and method. Resizing changes prepared-image scale; native instrument resolution is not automatically output resolution. Planar distance does not describe walking effort or terrain distance.
 
-Elevation and slope require an aligned verified DEM with units, datum, resolution, NoData and coverage handling. Calibration alone cannot enable terrain measurements. See docs/DATA.md.
+Elevation and slope require an aligned verified DEM with units, datum, resolution, NoData and coverage handling. Calibration alone cannot enable terrain measurements. See docs/DATA.md. Runtime scientific files live in public/data and public/assets.
 
 ## Reliability
 - Use safe text DOM APIs for notes and dataset content.
@@ -39,13 +39,15 @@ Elevation and slope require an aligned verified DEM with units, datum, resolutio
 - Browser storage can be cleared or restricted. Support JSON export for backups.
 - Run relevant checks after meaningful changes. Do not claim tests passed unless executed. Keep testing proportionate to the hackathon.
 
-## Angular team assignments and learning briefs
+## Learning while developing
+- Explain each component/service responsibility and keep the learning walkthrough current in docs/LEARNING.md.
+- Prefer template bindings, signals and named service methods over global DOM queries.
+- Keep Leaflet DOM operations inside MapComponent. Initialize after the container exists; remove the map and resize observer on destroy.
+- Keep one root-provided MissionService. Avoid component providers that accidentally split shared state.
+- Offline caching runs in the production build; use npm start for development and npm run build for the offline demo.
+- Use npm ci, npm test, npm run build and npm run test:browser for relevant verification. Do not force dependency upgrades/downgrades without reviewing compatibility.
 
-The team has approved Angular standalone components and TypeScript for ongoing development. That implementation is on feat/angular-migration; personal feature branches start from that Angular codebase and follow its Angular instructions. The plain JavaScript implementation notes above describe the original application on main.
-
-The six personal briefs are published on main under docs/team/. Read docs/team/README.md and the named learner's brief for assignments, branch setup, file ownership and the explicit prediction/teach-back checkpoints. The copy of docs/LEARNING.md on main explains the Angular codebase; Angular source paths such as src/app and public/ are available after switching to the Angular codebase. Preserve uncommitted work when switching.
-
-The scientific integrity, selected region and coordinate rules apply to both implementations. Documentation-only work on main does not require migrating the application. Do not merge the Angular migration merely to access the briefs.
+- For named teammate assignments, read docs/team/README.md and that learner's brief. Respect the explicit educational checkpoints and file ownership. These do not require permission for routine read-only inspection or ordinary development commands.
 
 ## Shared context
 
