@@ -1,5 +1,7 @@
 # YOU — Shared mission state, integration and offline demonstration
 
+> This brief is published on `main`. Its Angular implementation files are on `feat/angular-migration` and working branches created from it. Follow [the team guide](README.md) to start from the Angular codebase, preserving any uncommitted work.
+
 ## Prompt for my coding agent
 
 I am the project coordinator (YOU), a second-year Software Development student building MARSWALK with my teammates. Be my coding coach. Help me implement my assigned part and understand it well enough to explain, modify and debug it.

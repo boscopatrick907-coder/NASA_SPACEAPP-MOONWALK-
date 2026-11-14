@@ -4,7 +4,9 @@ These briefs are for Willy, Emma, Gaddielle, Enzo, Longla and the project coordi
 
 ## Start here
 
-The Angular application is on **feat/angular-migration**. At the time these briefs were created, main contains the original plain JavaScript prototype. Inspect the repository and current branch before editing.
+These six briefs and this shared guide are published on **main**. The Angular application is on **feat/angular-migration**, with personal working branches created from that codebase. The runnable app currently on main is the original plain JavaScript prototype.
+
+Read this guide before inspecting Angular implementation paths such as src/app or public/. Start from the Angular codebase using the commands below; those implementation paths are intentionally absent from main until the migration is merged. Preserve uncommitted work when changing branches.
 
 Read AGENTS.md, README.md, docs/LEARNING.md and your personal brief. Each personal file is a complete prompt you can paste into an agent; give that agent repository access too.
 

@@ -1,4 +1,7 @@
 # Learning MARSWALK
+
+> This learning guide is available on `main`; its code examples refer to the Angular implementation on `feat/angular-migration` and branches derived from it. Start with [the team guide](team/README.md) before inspecting or editing Angular source files.
+
 You are learning Angular while building a real prototype. Follow one interaction before reading every file.
 
 ## Start here
