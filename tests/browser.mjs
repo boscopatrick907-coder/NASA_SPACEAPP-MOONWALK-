@@ -4,8 +4,9 @@ import { readFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
-const root = path.resolve(fileURLToPath(new URL('../', import.meta.url)));
-const output = path.join(root, 'test-results');
+const project = path.resolve(fileURLToPath(new URL('../', import.meta.url)));
+const root = path.join(project, 'dist/marswalk/browser');
+const output = path.join(project, 'test-results');
 await mkdir(output, {recursive:true});
 const mime = {'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.webmanifest':'application/manifest+json','.jpg':'image/jpeg','.svg':'image/svg+xml'};
 const server = createServer(async (request,response) => {
@@ -49,7 +50,7 @@ try {
   });
   await page.screenshot({path:path.join(output,'desktop.png'),fullPage:true});
   await check('imagery toggle',async()=>{
-    await page.locator('#layer-imagery').uncheck();assert.equal(await page.locator('.leaflet-image-layer').count(),0);
+    await page.locator('#layer-imagery').uncheck();await page.locator('.leaflet-image-layer').waitFor({state:'detached'});assert.equal(await page.locator('.leaflet-image-layer').count(),0);
     await page.locator('#layer-imagery').check();await page.locator('.leaflet-image-layer').waitFor();
   });
   await check('manual route and unknown terrain',async()=>{
@@ -68,14 +69,14 @@ try {
     await page.locator('#load-route').click();await expectText('#route-count','2');
   });
   await check('demo science destination',async()=>{
-    await page.locator('[data-target="demo-ridge"]').click();assert.match(await text('#science-title'),/DEMO/);
+    await page.locator('[data-target="demo-ridge"]').click();await expectText('#science-title','Example ridge study · DEMO');
     assert.match(await text('#science-metadata'),/illustrative/i);await page.locator('#use-target').click();
-    assert.match(await text('#route-end'),/965\.0/);
+    await page.waitForFunction(()=>document.querySelector('#route-end')?.textContent.includes('965.0'));assert.match(await text('#route-end'),/965\.0/);
   });
   const note='<img src=x onerror="globalThis.marswalkInjected=true"> Test field observation';
   await check('safe notebook text and persistence',async()=>{
     await page.locator('#note-text').fill(note);await page.locator('#save-note').click();
-    assert.ok((await text('#notes-list')).includes(note));assert.equal(await page.locator('#notes-list img').count(),0);
+    await page.waitForFunction(note=>document.querySelector('#notes-list')?.textContent.includes(note),note);assert.ok((await text('#notes-list')).includes(note));assert.equal(await page.locator('#notes-list img').count(),0);
     assert.equal(await page.evaluate(()=>globalThis.marswalkInjected),undefined);
     await page.reload({waitUntil:'domcontentloaded'});await ready();assert.ok((await text('#notes-list')).includes(note));
   });
@@ -98,7 +99,7 @@ try {
     await page.locator('#clear-route').click();await page.locator('[data-mode="start"]').click();
     await page.locator('#map').focus();await page.keyboard.press('Enter');await expectText('#route-count','1');
     await page.evaluate(()=>localStorage.setItem('marswalk.route.v1',JSON.stringify({schemaVersion:1,imageReference:'other',route:{start:{x:1,y:1},destination:{x:2,y:2},waypoints:[]}})));
-    await page.locator('#load-route').click();await expectText('#route-count','1');assert.match(await text('#notice'),/match|invalid/i);
+    await page.locator('#load-route').click();await expectText('#notice','Saved route does not match this image or contains invalid points.');await expectText('#route-count','1');assert.match(await text('#notice'),/match|invalid/i);
   });
   for (const [name,viewport] of [['tablet',{width:1024,height:768}],['mobile',{width:390,height:844}]]) {
     await check(name+' viewport',async()=>{

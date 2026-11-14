@@ -29,3 +29,5 @@
 }
 .skip-link{left:-10000px;transform:none}
 .skip-link:focus{left:8px}
+
+app-root{display:block}.initial-message{padding:24px;color:var(--muted)}

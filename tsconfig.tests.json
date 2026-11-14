@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./.test-build",
+    "rootDir": ".",
+    "module": "ESNext",
+    "types": [
+      "node"
+    ],
+    "declaration": false
+  },
+  "include": [
+    "tests/*.test.ts",
+    "src/app/core/models.ts",
+    "src/app/core/route.ts",
+    "src/app/core/storage.ts"
+  ]
+}

@@ -7,8 +7,8 @@ The selected region is **Gale Crater, Mount Sharp boxwork formations investigate
 
 ## Implementation
 - Prioritize interactive imagery, scientific layer controls, geological context, manual start/destination/waypoint selection and supported route assessment.
-- Use plain HTML, CSS, JavaScript modules, Leaflet, JSON and prepared local assets. Keep map, route, storage and offline responsibilities separate.
-- Avoid frameworks, backends, databases and large browser-side scientific processing. Prepare scientific rasters with QGIS/GDAL.
+- Use Angular standalone components, TypeScript, CSS, Leaflet, JSON and prepared local assets. Keep map, route, storage and offline responsibilities separate. Angular is the team's requested stack.
+- Avoid extra UI/state frameworks, backends, databases and large browser-side scientific processing. Prepare scientific rasters with QGIS/GDAL.
 - Do not implement autonomous routing, real-time astronaut tracking, hardware integration or a helmet HUD.
 - Store essential runtime assets locally. Preserve licenses and image credits.
 - Inspect existing work and preserve teammates' changes. Do not commit credentials, node_modules or large raw products.
@@ -29,7 +29,7 @@ Use custom local-coordinate JSON, not geographic GeoJSON for pixel positions. Re
 
 Enable metric route distance only after independently validating a uniformly scaled local planar raster and documenting a positive finite metersPerPixel, verified flag, source URL and method. Resizing changes prepared-image scale; native instrument resolution is not automatically output resolution. Planar distance does not describe walking effort or terrain distance.
 
-Elevation and slope require an aligned verified DEM with units, datum, resolution, NoData and coverage handling. Calibration alone cannot enable terrain measurements. See docs/DATA.md.
+Elevation and slope require an aligned verified DEM with units, datum, resolution, NoData and coverage handling. Calibration alone cannot enable terrain measurements. See docs/DATA.md. Runtime scientific files live in public/data and public/assets.
 
 ## Reliability
 - Use safe text DOM APIs for notes and dataset content.
@@ -38,3 +38,11 @@ Elevation and slope require an aligned verified DEM with units, datum, resolutio
 - Reject stored routes and notes belonging to another image reference.
 - Browser storage can be cleared or restricted. Support JSON export for backups.
 - Run relevant checks after meaningful changes. Do not claim tests passed unless executed. Keep testing proportionate to the hackathon.
+
+## Learning while developing
+- Explain each component/service responsibility and keep the learning walkthrough current in docs/LEARNING.md.
+- Prefer template bindings, signals and named service methods over global DOM queries.
+- Keep Leaflet DOM operations inside MapComponent. Initialize after the container exists; remove the map and resize observer on destroy.
+- Keep one root-provided MissionService. Avoid component providers that accidentally split shared state.
+- Offline caching runs in the production build; use npm start for development and npm run build for the offline demo.
+- Use npm ci, npm test, npm run build and npm run test:browser for relevant verification. Do not force dependency upgrades/downgrades without reviewing compatibility.

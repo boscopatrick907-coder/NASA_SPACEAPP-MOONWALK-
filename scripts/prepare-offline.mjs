@@ -1,13 +1,30 @@
-/* Bump VERSION whenever a local asset changes. Cache is scoped per installation path. */
-const VERSION = 'marswalk-v1';
+// Angular creates hashed bundle names. Generate the cache list AFTER each production build.
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = fileURLToPath(new URL('../dist/marswalk/browser/', import.meta.url));
+async function list(directory) {
+  const results = [];
+  for (const entry of await readdir(directory, {withFileTypes: true})) {
+    const name = path.join(directory, entry.name);
+    if (entry.isDirectory()) results.push(...await list(name));
+    else if (entry.name !== 'sw.js') results.push(name);
+  }
+  return results;
+}
+const files = (await list(root)).sort();
+const fingerprint = createHash('sha256');
+for (const file of files) {
+  fingerprint.update(path.relative(root, file));
+  fingerprint.update(await readFile(file));
+}
+const version = 'marswalk-angular-v1-' + fingerprint.digest('hex').slice(0, 16);
+const paths = ['./', ...files.map(file => path.relative(root, file).split(path.sep).join('/'))];
+const worker = `const VERSION = ${JSON.stringify(version)};
 const CACHE = VERSION + '-' + self.registration.scope;
-const FILES = [
-  './', 'index.html', 'css/styles.css', 'js/app.js', 'js/map.js',
-  'js/route.js', 'js/storage.js', 'js/offline.js',
-  'data/manifest.json', 'data/demo-targets.json',
-  'assets/boxwork-context.jpg', 'assets/icon.svg', 'manifest.webmanifest',
-  'vendor/leaflet/leaflet.js', 'vendor/leaflet/leaflet.css'
-];
+const FILES = ${JSON.stringify(paths)};
 const urls = FILES.map(path => new URL(path, self.registration.scope).href);
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
@@ -49,3 +66,6 @@ self.addEventListener('fetch', event => {
     }
   })());
 });
+`;
+await writeFile(path.join(root, 'sw.js'), worker);
+console.log('Prepared offline worker:', paths.length, 'local assets; version', version);

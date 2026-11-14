@@ -22,7 +22,7 @@ Future geographic Mars support must document reference body/radius/ellipsoid/dat
 6. Keep source URLs and reproducible processing notes.
 
 ## Manifest
-data/manifest.json separates metadata from rendering. Record stable ID/type/title/status, local asset path, primary source/download URL, mission/instrument, observation date (separate from publication), credit, native/prepared resolution, coordinate conventions/transform, footprint, processing, NoData, uncertainty and verification history.
+public/data/manifest.json separates metadata from rendering. Record stable ID/type/title/status, local asset path, primary source/download URL, mission/instrument, observation date (separate from publication), credit, native/prepared resolution, coordinate conventions/transform, footprint, processing, NoData, uncertainty and verification history.
 
 Unknown fields stay null. A download is not scientific verification. Supplied status values are verified-context and unavailable; demo target identities/positions remain explicitly illustrative.
 
@@ -58,8 +58,8 @@ Historical observations are not live conditions. Ancient groundwater interpretat
 ## Integration checks
 - Verify source, footprint and coordinate conventions.
 - Prepare lightweight local runtime assets, preserving originals and processing notes elsewhere.
-- Update registry, adapter and image-reference version deliberately.
-- Add new runtime paths to sw.js required files and bump its version.
+- Update public/data, the typed models/map adapter and image-reference version deliberately.
+- Put runtime assets in public/. npm run build fingerprints all production output and generates sw.js automatically; do not edit the generated worker by hand.
 - Verify independent calibration and alignment, NoData behavior and route coverage.
 - Confirm missing data still displays unavailable/unknown.
 - Check attribution, observation dates and uncertainty in UI and exports.

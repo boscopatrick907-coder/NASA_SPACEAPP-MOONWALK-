@@ -1,0 +1,17 @@
+<div class="panel-heading"><span class="section-index">02</span><h2>Route planner</h2><span class="badge">MANUAL</span></div><p class="panel-intro">Sketch a proposed excursion on the image.</p>
+<div class="route-endpoints">
+  <div><span class="point-dot start-dot" aria-hidden="true"></span><span><small>START POINT</small><strong id="route-start">{{mission.coordinate(mission.route().start)}}</strong></span></div>
+  <div><span class="point-dot destination-dot" aria-hidden="true"></span><span><small>DESTINATION</small><strong id="route-end">{{mission.coordinate(mission.route().destination)}}</strong></span></div>
+</div>
+<div class="route-metrics">
+  <div><span>Mapped distance</span><strong id="route-distance">{{mission.distanceLabel()}}</strong><small>Verified scale required</small></div>
+  <div><span>Route points</span><strong id="route-count">{{mission.assessment().pointCount}}</strong><small>Start, waypoints, destination</small></div>
+  <div><span>Elevation change</span><strong id="route-elevation">Unavailable · DEM needed</strong><small>Verified DEM required</small></div>
+  <div><span>Slope assessment</span><strong id="route-slope">Unavailable · DEM needed</strong><small>Verified DEM required</small></div>
+</div>
+<div class="warning-box"><span aria-hidden="true">!</span><p id="route-warning">Terrain safety unknown. Exact AOI, scale, DEM and geolocated observations are unverified. Optical appearance alone cannot establish safe walking conditions.</p></div>
+<details class="route-points-details"><summary>Route points · image coordinates</summary><ol id="route-points">
+  @for (row of rows(); track $index) {<li>{{row.label}} · {{mission.coordinate(row.point)}}</li>}
+</ol></details>
+<div class="button-row"><button id="undo-route" class="button" type="button" [disabled]="!mission.history().length" (click)="mission.undo()">↶ Undo</button><button id="clear-route" class="button" type="button" [disabled]="!mission.points().length" (click)="mission.clearRoute()">Clear route</button></div>
+<div class="button-row"><button id="save-route" class="button button-primary" type="button" [disabled]="!mission.assessment().complete" (click)="mission.saveRoute()">Save route locally</button><button id="load-route" class="button" type="button" (click)="mission.loadRoute()">Load saved</button></div>

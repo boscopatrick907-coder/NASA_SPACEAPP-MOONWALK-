@@ -1,0 +1,17 @@
+<div class="map-heading"><div><p class="eyebrow">EXPLORATION MAP</p><h1 id="map-heading">Mount Sharp <span>/ Gale Crater</span></h1></div><span class="badge">REGIONAL CONTEXT</span></div>
+<div class="mode-toolbar" role="group" aria-label="Map interaction mode">
+  @for (item of modes; track item.mode) {
+    <button type="button" [attr.data-mode]="item.mode" [attr.aria-pressed]="mission.mode() === item.mode" [disabled]="!ready()" (click)="mission.setMode(item.mode)">{{item.label}}</button>
+  }
+</div>
+<div class="map-stage">
+  <div #mapHost id="map" tabindex="0" role="region" aria-label="Interactive Martian regional context image" aria-describedby="map-help" (keydown.enter)="selectCenter($event)" (keydown.escape)="mission.setMode('inspect')"></div>
+  <div id="map-loading" class="map-loading" [hidden]="ready()">
+    @if (error()) {<strong>Unable to open the map</strong><p>{{error()}} Check the local asset and data files.</p>}
+    @else {<strong>Opening the exploration workspace</strong><p>Loading locally prepared imagery…</p>}
+  </div>
+  <div class="map-caption"><span>NASA / HiRISE</span><small>Regional context · no verified ground scale</small></div>
+  <button id="fit-map" class="button map-fit" type="button" [disabled]="!ready()" (click)="fit()">⊡ Fit image</button>
+</div>
+<div class="map-statusbar"><span id="mode-status">{{mission.modeMessage()}}</span><small>LOCAL IMAGE COORDINATES</small></div>
+<p id="map-help" class="map-help">Tap or click to place a point. Keyboard: arrows pan, + / − zoom, Enter selects the map center in a selection mode. Escape returns to Inspect.</p>

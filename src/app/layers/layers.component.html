@@ -1,0 +1,24 @@
+<div class="panel-heading"><span class="section-index">01</span><h2>Scientific layers</h2></div>
+<p class="panel-intro">Explore available data and its limitations.</p>
+<div class="layer-group"><p class="eyebrow">AVAILABLE IN THIS PACKAGE</p>
+  @for (layer of layers; track layer.name) {
+    <label class="layer-row"><input #checkbox type="checkbox" [id]="'layer-' + layer.name" [checked]="mission.layers()[layer.name]" (change)="mission.toggleLayer(layer.name, checkbox.checked)"><span><strong>{{layer.title}}</strong><small>{{layer.detail}}</small></span></label>
+  }
+</div>
+<div class="layer-group unavailable"><p class="eyebrow">AWAITING VERIFIED DATA</p>
+  <label class="layer-row"><input type="checkbox" disabled><span><strong>Elevation &amp; slope</strong><small>Verified data needed</small></span></label>
+  <label class="layer-row"><input type="checkbox" disabled><span><strong>Mineralogy / chemistry</strong><small>Verified data needed</small></span></label>
+</div>
+<div class="coverage-key"><span aria-hidden="true">!</span><div><strong>Missing data ≠ low risk</strong><p>Terrain concerns cannot be assessed from this context image.</p></div></div>
+<details class="source-details"><summary>Data provenance</summary><div id="source-table">
+  @for (dataset of mission.manifest()?.datasets ?? []; track dataset.id) {
+    <article class="source-card"><h4>{{dataset.title}}</h4>
+      <p>{{dataset.status === 'verified-context' ? 'Verified imagery · regional context only' : 'Unavailable · verified data required'}}</p>
+      <p>{{dataset.instrument ?? 'Instrument unknown'}} · {{dataset.observationDate ? 'Observed ' + dataset.observationDate : 'Observation date unavailable'}} · {{dataset.resolutionMetersPerPixel === null ? 'Metric resolution unverified' : dataset.resolutionMetersPerPixel + ' m/px'}}</p>
+      @if (dataset.credit) {<p>{{dataset.credit}}</p>}
+      <p>{{dataset.limitations.join(' ')}}</p>
+      @if (dataset.sourceUrl) {<a [href]="dataset.sourceUrl" target="_blank" rel="noopener noreferrer">{{dataset.productId}} · source and provenance</a>}
+    </article>
+  }
+</div></details>
+<div class="location-card"><span class="eyebrow">SELECTED REGION</span><strong>Gale Crater</strong><span>Mount Sharp · Boxwork formations</span><p>Final exploration boundaries require verified NASA data.</p></div>
