@@ -3,6 +3,11 @@ Martian Surface Exploration and Safety Planner. A learning-focused prototype for
 
 The selected region remains Gale Crater / Mount Sharp boxwork. Exact AOI boundaries, calibration and terrain observations require verification. **Research prototype, not a certified astronaut navigation or safety system.**
 
+
+## Shared project context
+
+Read [CONTEXT.md](CONTEXT.md) for the project background, branch status, current team roles, scientific limits and pending review of the user-selected full team plan.
+
 ## What changed
 The first version used plain HTML/CSS/JavaScript. This edition moves the same working mission flow into Angular 21 standalone components and TypeScript. Leaflet remains the map engine. The vanilla prototype remains on main while this migration is reviewed.
 

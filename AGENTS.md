@@ -48,3 +48,7 @@ Elevation and slope require an aligned verified DEM with units, datum, resolutio
 - Use npm ci, npm test, npm run build and npm run test:browser for relevant verification. Do not force dependency upgrades/downgrades without reviewing compatibility.
 
 - For named teammate assignments, read docs/team/README.md and that learner's brief. Respect the explicit educational checkpoints and file ownership. These do not require permission for routine read-only inspection or ordinary development commands.
+
+## Shared context
+
+Read [CONTEXT.md](CONTEXT.md) for the current project snapshot and pending review of MARSWALK Full Team Plan.pdf. The user has chosen that plan, but its contents have not been read; do not infer or claim PDF-derived assignments. Existing briefs describe the current allocation pending reconciliation with the actual plan.
